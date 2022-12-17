@@ -1,6 +1,56 @@
-p {
-    font-weight: 800;
-    font-size: 2em;
-    text-align: center;
-    color: #555555;
+:root {
+    --body-background: #D7D7D7;
+    --calculator-background: #181818;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--body-background);
+}
+
+.main-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    height: 100vh;
+}
+
+/* General styles */
+
+/* Header */
+
+header {
+    margin: 35px 0;
+}
+
+/* Calculator */
+
+.calculator-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.calculator {
+    width: 375px;
+    height: 450px;
+
+    background-color: var(--calculator-background);
+}
+
+/* View source code */
+
+.view-source-code-section {
+    margin: 35px 0;
+}
+
+/* Footer */
+
+footer {
+    margin: 20px 0;
 }
