@@ -62,6 +62,8 @@ header {
 
     background-color: var(--calculator-background);
     border-radius: 10px;
+
+    filter: drop-shadow(15px 15px 0px rgba(0, 0, 0, 0.12));
 }
 
 .display {
