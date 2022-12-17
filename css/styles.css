@@ -93,8 +93,8 @@ header {
 .source-code-button {
     background-color: var(--primary-accent);
     border: none;
-    border-radius: 10px;
-    padding: 20px 30px; 
+    border-radius: 12px;
+    padding: 25px 35px; 
 
     font-family: inherit;
     font-size: 1.25em;
