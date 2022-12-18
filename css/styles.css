@@ -83,13 +83,13 @@ header {
     border-radius: 2px;
 }
 
-.previous-data {
+#previous-data {
     color: var(--previous-data-accent);
     font-size: 1.15em;
     margin-bottom: 2px;
 }
 
-.current-data {
+#current-data {
     color: var(--white-accent);
     font-size: 2.25em;
 }
@@ -107,7 +107,7 @@ header {
     height: 100%;
 }
 
-.calc-button {
+.buttons button {
     font-family: inherit;
     font-size: 1.3em;
     font-weight: 700;
@@ -119,23 +119,23 @@ header {
     transition: 200ms;
 }
 
-.calc-button:hover {
+.buttons button:hover {
     scale: 1.05;
     transition: 200ms;
 
     cursor: pointer;
 }
 
-.calc-button:active {
+.buttons button:active {
     scale: 1;
     transition: 75ms;
 }
 
-.calc-button.action-button:active {
+.action-button:active {
     filter: brightness(140%);
 }
 
-.calc-button.number-button:active {
+.number-button:active {
     filter: brightness(75%);
 }
 
@@ -144,11 +144,11 @@ header {
     color: var(--white-accent);
 }
 
-.calc-button#all-clear {
+#all-clear {
     background-color: var(--clear-data-button);
 }
 
-.calc-button#equals {
+#equals {
     background-color: var(--primary-accent);
     grid-row: span 2;
 }
@@ -157,7 +157,7 @@ header {
     background-color: var(--number-button);
 }
 
-.calc-button#num-0 {
+#num-0 {
     grid-column: span 2;
 }
 
