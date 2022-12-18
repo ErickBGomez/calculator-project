@@ -115,6 +115,28 @@ header {
     border: none;
     border-radius: 5px;
     padding: 0;
+
+    transition: 200ms;
+}
+
+.calc-button:hover {
+    scale: 1.05;
+    transition: 200ms;
+
+    cursor: pointer;
+}
+
+.calc-button:active {
+    scale: 1;
+    transition: 75ms;
+}
+
+.calc-button.action-button:active {
+    filter: brightness(140%);
+}
+
+.calc-button.number-button:active {
+    filter: brightness(75%);
 }
 
 .action-button {
@@ -155,6 +177,20 @@ header {
     font-size: 1.25em;
     font-weight: 800;
     color: var(--white-accent);
+
+    transition: 200ms;
+}
+
+.source-code-button:hover {
+    scale: 1.07;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.source-code-button:active {
+    scale: 1;
+    filter: brightness(140%);
+    transition: 75ms;
 }
 
 /* Footer */
