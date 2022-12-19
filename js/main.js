@@ -10,6 +10,7 @@ const numberButtons = document.querySelectorAll(".number-button");
 const decimalPointButton = document.querySelector("#decimal-point");
 
 const backspaceButton = document.querySelector("#backspace");
+const allClearButton = document.querySelector("#all-clear");
 
 function updateCurrentData(newValue) {
     currentDataDisplay.textContent = (newValue || "0");
@@ -33,6 +34,11 @@ function removeDigit() {
     checkDecimalPoint();
 }
 
+function clearCurrentPrompt() {
+    currentPrompt = "";
+    updateCurrentData(currentPrompt);
+}
+
 function checkDecimalPoint() {
     // Prevent adding more than one decimal point
     decimalPointButton.disabled = currentPrompt.includes(".");
@@ -41,6 +47,7 @@ function checkDecimalPoint() {
 // Events
 numberButtons.forEach(button => button.addEventListener("mousedown", insertDigit));
 backspaceButton.addEventListener("mousedown", removeDigit);
+allClearButton.addEventListener("mousedown", clearCurrentPrompt);
 
 // First loading functions
 updateCurrentData(currentPrompt);
