@@ -1,31 +1,44 @@
+// Constants and variables
 const DATA_MAX_LENGTH = 12;
 
-const currentData = document.querySelector("#current-data");
+let currentPrompt = "";
+
+// DOM Queries
+const currentDataDisplay = document.querySelector("#current-data");
 
 const numberButtons = document.querySelectorAll(".number-button");
 const decimalPointButton = document.querySelector("#decimal-point");
 
 const backspaceButton = document.querySelector("#backspace");
 
-numberButtons.forEach(button => button.addEventListener("mousedown", insertDigit));
-
-backspaceButton.addEventListener("mousedown", removeDigit)
+function updateCurrentData(newValue) {
+    currentDataDisplay.textContent = (newValue || "0");
+}
 
 function insertDigit(e) {
-    if (currentData.textContent.length < DATA_MAX_LENGTH) {
-        currentData.textContent += e.target.dataset.value;
+    if (currentPrompt.length < DATA_MAX_LENGTH) {
+        currentPrompt += e.target.dataset.value;
+        updateCurrentData(currentPrompt);
     }
 
     checkDecimalPoint();
 }
 
 function removeDigit() {
-    currentData.textContent = currentData.textContent.slice(0, -1);
+    currentPrompt = currentPrompt.slice(0, -1);
+    updateCurrentData(currentPrompt);
 
     checkDecimalPoint();
 }
 
 function checkDecimalPoint() {
     // Prevent adding more than one decimal point
-    decimalPointButton.disabled = currentData.textContent.includes(".");
+    decimalPointButton.disabled = currentPrompt.includes(".");
 }
+
+// Events
+numberButtons.forEach(button => button.addEventListener("mousedown", insertDigit));
+backspaceButton.addEventListener("mousedown", removeDigit);
+
+// First loading functions
+updateCurrentData(currentPrompt);
