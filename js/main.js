@@ -16,16 +16,18 @@ function updateCurrentData(newValue) {
 }
 
 function insertDigit(e) {
-    if (currentPrompt.length < DATA_MAX_LENGTH) {
-        currentPrompt += e.target.dataset.value;
-        updateCurrentData(currentPrompt);
-    }
+    if (currentPrompt.length >= DATA_MAX_LENGTH) return;
+    if (!currentPrompt && e.target.dataset.value === ".") currentPrompt = "0";
 
+    currentPrompt += e.target.dataset.value;
+    updateCurrentData(currentPrompt);
+    
     checkDecimalPoint();
 }
 
 function removeDigit() {
     currentPrompt = currentPrompt.slice(0, -1);
+    if (currentPrompt === "0") currentPrompt = "";
     updateCurrentData(currentPrompt);
 
     checkDecimalPoint();
