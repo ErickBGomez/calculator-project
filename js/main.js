@@ -1,10 +1,15 @@
 // Constants and variables
 const DATA_MAX_LENGTH = 12;
 
-let currentPrompt = "";
+let currentPrompt = "10";
+let firstOperand = 0;
+let secondOperand = 0;
+let selectedOperator = "";
 
 // DOM Queries
 const currentDataDisplay = document.querySelector("#current-data");
+
+const operatorButtons = document.querySelectorAll(".operator-button");
 
 const numberButtons = document.querySelectorAll(".number-button");
 const decimalPointButton = document.querySelector("#decimal-point");

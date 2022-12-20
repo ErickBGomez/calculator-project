@@ -75,6 +75,12 @@ header {
 /* Calculator: Display */
 
 .display {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    height: 87px;
+
     font-family: 'Martian Mono', monospace;
     padding: 10px 15px;
     text-align: right;
@@ -103,8 +109,6 @@ header {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
     gap: 15px;
-
-    height: 100%;
 }
 
 .buttons button {
