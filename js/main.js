@@ -1,7 +1,7 @@
 // Constants and variables
 const DATA_MAX_LENGTH = 12;
 
-let currentPrompt = "10";
+let currentPrompt = "";
 
 let firstOperand = 0;
 let secondOperand = 0;
@@ -40,21 +40,18 @@ function updatePreviousData(firstValue, operator, secondValue = "") {
 }
 
 function insertDigit(e) {
-    if (currentPrompt.length >= DATA_MAX_LENGTH) return;
+    if ((currentPrompt.length >= DATA_MAX_LENGTH) ||
+        (currentPrompt.includes(".") && e.target.dataset.value === ".")) return;
     if (!currentPrompt && e.target.dataset.value === ".") currentPrompt = "0";
 
     currentPrompt += e.target.dataset.value;
     updateCurrentData(currentPrompt);
-    
-    checkDecimalPoint();
 }
 
 function removeDigit() {
     currentPrompt = currentPrompt.slice(0, -1);
     if (currentPrompt === "0") currentPrompt = "";
     updateCurrentData(currentPrompt);
-
-    checkDecimalPoint();
 }
 
 function clearAllData() {
@@ -68,11 +65,6 @@ function clearAllData() {
     updatePreviousData("", "");
 }
 
-function checkDecimalPoint() {
-    // Prevent adding more than one decimal point
-    decimalPointButton.disabled = currentPrompt.includes(".");
-}
-
 function selectOperator(e) {
     selectedOperator = e.target.dataset.operator;
 
@@ -80,10 +72,12 @@ function selectOperator(e) {
 }
 
 function calculateOperation() {
-    secondOperand = +currentDataDisplay.textContent;
-    currentPrompt = "";
-    updatePreviousData(firstOperand, selectedOperator, secondOperand + " =");
+    if (!selectedOperator) return;
 
+    secondOperand = +currentDataDisplay.textContent;
+    updatePreviousData(firstOperand, selectedOperator, secondOperand + " =");
+    
+    currentPrompt = "";
     let result = 0;
 
     switch (selectedOperator) {
