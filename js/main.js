@@ -15,6 +15,7 @@ const numberButtons = document.querySelectorAll(".number-button");
 const decimalPointButton = document.querySelector("#decimal-point");
 
 const operatorButtons = document.querySelectorAll(".operator-button");
+const equalsButton = document.querySelector("#equals");
 
 const backspaceButton = document.querySelector("#backspace");
 const allClearButton = document.querySelector("#all-clear");
@@ -78,9 +79,38 @@ function selectOperator(e) {
     updateAllData();
 }
 
+function calculateOperation() {
+    secondOperand = +currentDataDisplay.textContent;
+    currentPrompt = "";
+    updatePreviousData(firstOperand, selectedOperator, secondOperand + " =");
+
+    let result = 0;
+
+    switch (selectedOperator) {
+        case "+":
+            result = firstOperand + secondOperand;
+            break;
+
+        case "-":
+            result = firstOperand - secondOperand;
+            break;
+        
+        case "×":
+            result = firstOperand * secondOperand;
+            break;
+        
+        case "÷":
+            result = firstOperand / secondOperand;
+            break;
+    }
+
+    currentDataDisplay.textContent = result;
+}
+
 // Events
 numberButtons.forEach(button => button.addEventListener("mousedown", insertDigit));
 operatorButtons.forEach(button => button.addEventListener("mousedown", selectOperator));
+equalsButton.addEventListener("mousedown", calculateOperation);
 backspaceButton.addEventListener("mousedown", removeDigit);
 allClearButton.addEventListener("mousedown", clearAllData);
 
