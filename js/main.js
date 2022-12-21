@@ -66,6 +66,8 @@ function clearAllData() {
 }
 
 function selectOperator(e) {
+    if (selectedOperator) calculateOperation();
+
     selectedOperator = e.target.dataset.operator;
 
     updateAllData();
