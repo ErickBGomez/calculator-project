@@ -100,6 +100,20 @@ function calculateOperation() {
             break;
     }
 
+    // If result is decimal
+    if (result % 1 !== 0) {
+        if (result.toString().length > DATA_MAX_LENGTH) {
+            const digitsSplitted = {
+                integer: result.toString().split(".")[0],
+                decimal: result.toString().split(".")[1]
+            }
+
+            console.log(digitsSplitted);
+
+            result = +result.toFixed(DATA_MAX_LENGTH - (digitsSplitted.integer.length + 1));
+        }
+    }
+
     currentDataDisplay.textContent = result;
 }
 
