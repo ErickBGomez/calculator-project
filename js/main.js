@@ -33,10 +33,10 @@ function updatePreviousData(firstValue, operator, secondValue = "") {
 
 function insertDigit(e) {
     if ((currentPrompt.length >= DATA_MAX_LENGTH)
-    ||  (currentPrompt.includes(".") && e.target.dataset.value === ".")
-    ||  (!currentPrompt && e.target.dataset.value === "0")) return;
+    ||  (currentPrompt.includes(".") && e.target.dataset.value === ".")) return;
 
     if (!currentPrompt && e.target.dataset.value === ".") currentPrompt = "0";
+    if (currentPrompt === "0") currentPrompt = "";
 
     currentPrompt += e.target.dataset.value;
     updateCurrentData(currentPrompt);
@@ -123,12 +123,8 @@ function calculateOperation() {
 }
 
 function roundDecimal(number) {
-    const digitsSplitted = {
-        integer: number.toString().split(".")[0],
-        decimal: number.toString().split(".")[1]
-    }
-
-    return Number(number.toFixed(DATA_MAX_LENGTH - (digitsSplitted.integer.length + 1)));
+    const integerDigits = number.toString().split(".")[0];
+    return Number(number.toFixed(DATA_MAX_LENGTH - (integerDigits.length + 1)));
 }
 
 function scaleDownDataDisplay(dataDisplay, scaleIndex) {
