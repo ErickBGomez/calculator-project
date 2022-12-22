@@ -1,5 +1,6 @@
 // Constants and variables
-const DATA_MAX_LENGTH = 12;
+const CURRENT_DATA_MAX_LENGTH = 12;
+const PREVIOUS_DATA_MAX_LENGTH = 23;
 
 let currentPrompt = "";
 let firstOperand = 0;
@@ -24,15 +25,17 @@ const allClearButton = document.querySelector("#all-clear");
 // Functions
 function updateCurrentData(newValue) {
     currentDataDisplay.textContent = (newValue || "0");
-    scaleDownDataDisplay(currentDataDisplay, 20);
+    scaleDataDisplay(currentDataDisplay, CURRENT_DATA_MAX_LENGTH, 20);
 }
 
 function updatePreviousData(firstValue, operator, secondValue = "") {
     previousDataDisplay.textContent = `${firstValue} ${operator} ${secondValue}`;
+
+    scaleDataDisplay(previousDataDisplay, PREVIOUS_DATA_MAX_LENGTH, 2);
 }
 
 function insertDigit(e) {
-    if ((currentPrompt.length >= DATA_MAX_LENGTH)
+    if ((currentPrompt.length >= CURRENT_DATA_MAX_LENGTH)
     ||  (currentPrompt.includes(".") && e.target.dataset.value === ".")) return;
 
     if (currentPrompt === "0") currentPrompt = "";
@@ -112,24 +115,27 @@ function calculateOperation() {
             break;
     }
 
+    
+    
     // If result is decimal
-    if ((result % 1 !== 0)) {
-        if (result.toString().length <= DATA_MAX_LENGTH) return;
-        result = roundDecimal(result);
+    if ((result % 1 !== 0) && (result !== Infinity)) {
+        if (result.toString().length > CURRENT_DATA_MAX_LENGTH) {
+            result = roundDecimal(result);
+        }
     }
-
+    
     showingResult = true;
     updateCurrentData(result);
 }
 
 function roundDecimal(number) {
     const integerDigits = number.toString().split(".")[0];
-    return Number(number.toFixed(DATA_MAX_LENGTH - (integerDigits.length + 1)));
+    return Number(number.toFixed(CURRENT_DATA_MAX_LENGTH - (integerDigits.length + 1)));
 }
 
-function scaleDownDataDisplay(dataDisplay, scaleIndex) {
-    if (dataDisplay.textContent.length > DATA_MAX_LENGTH) {
-        const extraDigits = currentDataDisplay.textContent.length - DATA_MAX_LENGTH;
+function scaleDataDisplay(dataDisplay, maxLength, scaleIndex) {
+    if (dataDisplay.textContent.length > maxLength) {
+        const extraDigits = dataDisplay.textContent.length - maxLength;
 
         dataDisplay.style.scale = 1 - (extraDigits / scaleIndex);
         dataDisplay.style.alignSelf = "center";
