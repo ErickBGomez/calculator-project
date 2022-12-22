@@ -71,14 +71,14 @@ function scaleDataDisplay(dataDisplay, maxLength, scaleIndex) {
 }
 
 // Insert and removes digits and select operators
-function insertDigit(e) {
+function insertDigit(numberValue) {
     if ((currentPrompt.length >= CURRENT_DATA_MAX_LENGTH)
-    ||  (currentPrompt.includes(".") && e.target.dataset.value === ".")) return;
+    ||  (currentPrompt.includes(".") && numberValue === ".")) return;
 
     if (currentPrompt === "0") currentPrompt = "";
-    if (!currentPrompt && e.target.dataset.value === ".") currentPrompt = "0";
+    if (!currentPrompt && numberValue === ".") currentPrompt = "0";
 
-    currentPrompt += e.target.dataset.value;
+    currentPrompt += numberValue;
     updateCurrentData(currentPrompt);
     
     clearAfterResult();
@@ -92,11 +92,11 @@ function removeDigit() {
     clearAfterResult()
 }
 
-function selectOperator(e) {
+function selectOperator(operatorValue) {
     if (selectedOperator) calculateOperation();
     showingResult = false;
 
-    selectedOperator = parseOperator(e.target.dataset.value);
+    selectedOperator = parseOperator(operatorValue);
     firstOperand = Number(currentDataDisplay.textContent);
 
     updatePreviousData(firstOperand, selectedOperator);
@@ -146,8 +146,6 @@ function calculateOperation() {
             break;
     }
 
-    
-    
     // If result is decimal
     if ((result % 1 !== 0) && (result !== Infinity)) {
         if (result.toString().length > CURRENT_DATA_MAX_LENGTH) {
@@ -164,13 +162,44 @@ function roundDecimal(number) {
     return Number(number.toFixed(CURRENT_DATA_MAX_LENGTH - (integerDigits.length + 1)));
 }
 
+// Keyboard actions
+
+function keyboardAction(e) {
+    const buttonKey = document.querySelector(`button[data-value="${e.key}"]`);
+
+    if ((e.key >= 0 && e.key <= 9) || e.key === ".") {
+        insertDigit(buttonKey.dataset.value);
+    } else {
+        switch(e.key) {
+            case "+":
+            case "-":
+            case "*":
+            case "/":
+                selectOperator(buttonKey.dataset.value);
+                break;
+            
+            case "Enter":
+                calculateOperation();
+                break;
+
+            case "Backspace":
+                removeDigit();
+                break;
+
+            case "Escape":
+                clearAllData();
+                break;
+        }
+    }
+}
+
 // Events
-numberButtons.forEach(button => button.addEventListener("mousedown", insertDigit));
-operatorButtons.forEach(button => button.addEventListener("mousedown", selectOperator));
+numberButtons.forEach(button => button.addEventListener("mousedown", e => insertDigit(e.target.dataset.value)));
+operatorButtons.forEach(button => button.addEventListener("mousedown", e => selectOperator(e.target.dataset.value)));
 equalsButton.addEventListener("mousedown", calculateOperation);
 backspaceButton.addEventListener("mousedown", removeDigit);
 allClearButton.addEventListener("mousedown", clearAllData);
+document.addEventListener("keydown", keyboardAction);
 
 // First loading functions
-updateCurrentData(currentPrompt);
-clearPreviousData();
+clearAllData();
