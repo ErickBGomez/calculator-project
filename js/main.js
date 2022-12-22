@@ -96,12 +96,26 @@ function selectOperator(e) {
     if (selectedOperator) calculateOperation();
     showingResult = false;
 
-    selectedOperator = e.target.dataset.value;
+    selectedOperator = parseOperator(e.target.dataset.value);
     firstOperand = Number(currentDataDisplay.textContent);
 
     updatePreviousData(firstOperand, selectedOperator);
     
     currentPrompt = "";
+}
+
+function parseOperator(operator) {
+    switch (operator) {
+        case "+":
+        case "-":
+            return operator;
+
+        case "*":
+            return "×";
+    
+        case "/":
+            return "÷";
+    }
 }
 
 // Calculation and information processing
