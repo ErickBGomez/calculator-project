@@ -1,6 +1,8 @@
 // Constants and variables
 const CURRENT_DATA_MAX_LENGTH = 12;
 const PREVIOUS_DATA_MAX_LENGTH = 26;
+const CURRENT_DATA_SCALE_INDEX = 20;
+const PREVIOUS_DATA_SCALE_INDEX = 40;
 
 let currentPrompt = "";
 let firstOperand = 0;
@@ -25,13 +27,13 @@ const allClearButton = document.querySelector("#all-clear");
 // Functions
 function updateCurrentData(newValue) {
     currentDataDisplay.textContent = (newValue || "0");
-    scaleDataDisplay(currentDataDisplay, CURRENT_DATA_MAX_LENGTH, 20);
+    scaleDataDisplay(currentDataDisplay, CURRENT_DATA_MAX_LENGTH, CURRENT_DATA_SCALE_INDEX);
 }
 
 function updatePreviousData(firstValue = "", operator = "", secondValue = "") {
     previousDataDisplay.textContent = `${firstValue} ${operator} ${secondValue}`;
 
-    scaleDataDisplay(previousDataDisplay, PREVIOUS_DATA_MAX_LENGTH, 40);
+    scaleDataDisplay(previousDataDisplay, PREVIOUS_DATA_MAX_LENGTH, PREVIOUS_DATA_SCALE_INDEX);
 }
 
 function insertDigit(e) {
