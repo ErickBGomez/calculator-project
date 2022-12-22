@@ -20,19 +20,8 @@ const equalsButton = document.querySelector("#equals");
 const backspaceButton = document.querySelector("#backspace");
 const allClearButton = document.querySelector("#all-clear");
 
-function updateAllData() {
-    updateOperands();
-    updatePreviousData(firstOperand, selectedOperator);
-    
-    currentPrompt = "";
-}
-
 function updateCurrentData(newValue) {
     currentDataDisplay.textContent = (newValue || "0");
-}
-
-function updateOperands() {
-    firstOperand = +currentDataDisplay.textContent;
 }
 
 function updatePreviousData(firstValue, operator, secondValue = "") {
@@ -40,8 +29,10 @@ function updatePreviousData(firstValue, operator, secondValue = "") {
 }
 
 function insertDigit(e) {
-    if ((currentPrompt.length >= DATA_MAX_LENGTH) ||
-        (currentPrompt.includes(".") && e.target.dataset.value === ".")) return;
+    if ((currentPrompt.length >= DATA_MAX_LENGTH)
+    ||  (currentPrompt.includes(".") && e.target.dataset.value === ".")
+    ||  (!currentPrompt && e.target.dataset.value === "0")) return;
+    
     if (!currentPrompt && e.target.dataset.value === ".") currentPrompt = "0";
 
     currentPrompt += e.target.dataset.value;
@@ -69,14 +60,17 @@ function selectOperator(e) {
     if (selectedOperator) calculateOperation();
 
     selectedOperator = e.target.dataset.operator;
+    firstOperand = Number(currentDataDisplay.textContent);
 
-    updateAllData();
+    updatePreviousData(firstOperand, selectedOperator);
+    
+    currentPrompt = "";
 }
 
 function calculateOperation() {
     if (!selectedOperator) return;
 
-    secondOperand = +currentDataDisplay.textContent;
+    secondOperand = Number(currentDataDisplay.textContent);
     updatePreviousData(firstOperand, selectedOperator, secondOperand + " =");
     
     currentPrompt = "";
@@ -102,16 +96,16 @@ function calculateOperation() {
 
     // If result is decimal
     if (result % 1 !== 0) {
-        if (result.toString().length > DATA_MAX_LENGTH) {
-            const digitsSplitted = {
-                integer: result.toString().split(".")[0],
-                decimal: result.toString().split(".")[1]
-            }
-
-            console.log(digitsSplitted);
-
-            result = +result.toFixed(DATA_MAX_LENGTH - (digitsSplitted.integer.length + 1));
+        if (result.toString().length <= DATA_MAX_LENGTH) return;
+     
+        const digitsSplitted = {
+            integer: result.toString().split(".")[0],
+            decimal: result.toString().split(".")[1]
         }
+
+        console.log(digitsSplitted);
+
+        result = Number(result.toFixed(DATA_MAX_LENGTH - (digitsSplitted.integer.length + 1)));
     }
 
     currentDataDisplay.textContent = result;
