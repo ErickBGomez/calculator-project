@@ -24,6 +24,7 @@ const allClearButton = document.querySelector("#all-clear");
 // Functions
 function updateCurrentData(newValue) {
     currentDataDisplay.textContent = (newValue || "0");
+    scaleDownDataDisplay(currentDataDisplay, 20);
 }
 
 function updatePreviousData(firstValue, operator, secondValue = "") {
@@ -85,7 +86,7 @@ function selectOperator(e) {
 }
 
 function calculateOperation() {
-    if (!selectedOperator) return;
+    if (!selectedOperator || !currentPrompt) return;
 
     secondOperand = Number(currentDataDisplay.textContent);
     updatePreviousData(firstOperand, selectedOperator, secondOperand + " =");
@@ -118,7 +119,7 @@ function calculateOperation() {
     }
 
     showingResult = true;
-    currentDataDisplay.textContent = result;
+    updateCurrentData(result);
 }
 
 function roundDecimal(number) {
@@ -128,6 +129,17 @@ function roundDecimal(number) {
     }
 
     return Number(number.toFixed(DATA_MAX_LENGTH - (digitsSplitted.integer.length + 1)));
+}
+
+function scaleDownDataDisplay(dataDisplay, scaleIndex) {
+    if (dataDisplay.textContent.length > DATA_MAX_LENGTH) {
+        const extraDigits = currentDataDisplay.textContent.length - DATA_MAX_LENGTH;
+
+        dataDisplay.style.scale = 1 - (extraDigits / scaleIndex);
+        dataDisplay.style.alignSelf = "center";
+    } else {
+        dataDisplay.removeAttribute("style");
+    }
 }
 
 // Events
