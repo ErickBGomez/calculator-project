@@ -24,6 +24,8 @@ const equalsButton = document.querySelector("#equals");
 const backspaceButton = document.querySelector("#backspace");
 const allClearButton = document.querySelector("#all-clear");
 
+const sourceCodeButton = document.querySelector("#source-code-button");
+
 // Functions:
 
 // Update, clear and scale display data
@@ -60,13 +62,13 @@ function clearAfterResult() {
 }
 
 function scaleDataDisplay(dataDisplay, maxLength, scaleIndex) {
+    dataDisplay.removeAttribute("style");
+
     if (dataDisplay.textContent.length > maxLength) {
         const extraDigits = dataDisplay.textContent.length - maxLength;
 
         dataDisplay.style.scale = 1 - (extraDigits / scaleIndex);
         dataDisplay.style.alignSelf = "center";
-    } else {
-        dataDisplay.removeAttribute("style");
     }
 }
 
@@ -163,14 +165,17 @@ function roundDecimal(number) {
 }
 
 // Keyboard actions
+
 function pressKeyAction(e) {
     const buttonKey = document.querySelector(`button[data-value="${e.key}"]`);
+
     if (!buttonKey) return;
 
     playKeyActionAnimation(buttonKey);
     
     if ((e.key >= 0 && e.key <= 9) || e.key === ".") {
         insertDigit(buttonKey.dataset.value);
+        //buttonKey.click();
     } else {
         switch(e.key) {
             case "+":
@@ -200,6 +205,12 @@ function playKeyActionAnimation(button) {
     button.addEventListener("transitionend", () => button.classList.remove("pressed"));
 }
 
+// Others
+
+function openSourceCode() {
+    window.open("https://github.com/ErickBGomez/calculator-project", "_blank").focus();
+}
+
 // Events
 numberButtons.forEach(button => button.addEventListener("mousedown", e => insertDigit(e.target.dataset.value)));
 operatorButtons.forEach(button => button.addEventListener("mousedown", e => selectOperator(e.target.dataset.value)));
@@ -207,6 +218,7 @@ equalsButton.addEventListener("mousedown", calculateOperation);
 backspaceButton.addEventListener("mousedown", removeDigit);
 allClearButton.addEventListener("mousedown", clearAllData);
 document.addEventListener("keydown", pressKeyAction);
+sourceCodeButton.addEventListener("click", openSourceCode);
 
 // First loading functions
 clearAllData();

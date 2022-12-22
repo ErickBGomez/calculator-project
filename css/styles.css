@@ -177,7 +177,7 @@ header {
     margin: 35px 0;
 }
 
-.source-code-button {
+#source-code-button {
     background-color: var(--primary-accent);
     border: none;
     border-radius: 12px;
@@ -191,13 +191,13 @@ header {
     transition: 200ms;
 }
 
-.source-code-button:hover {
+#source-code-button:hover {
     scale: 1.07;
     cursor: pointer;
     transition: 200ms;
 }
 
-.source-code-button:active {
+#source-code-button:active {
     scale: 1;
     filter: brightness(140%);
     transition: 75ms;
