@@ -24,7 +24,9 @@ const equalsButton = document.querySelector("#equals");
 const backspaceButton = document.querySelector("#backspace");
 const allClearButton = document.querySelector("#all-clear");
 
-// Functions
+// Functions:
+
+// Update, clear and scale display data
 function updateCurrentData(newValue) {
     currentDataDisplay.textContent = (newValue || "0");
     scaleDataDisplay(currentDataDisplay, CURRENT_DATA_MAX_LENGTH, CURRENT_DATA_SCALE_INDEX);
@@ -34,27 +36,6 @@ function updatePreviousData(firstValue = "", operator = "", secondValue = "") {
     previousDataDisplay.textContent = `${firstValue} ${operator} ${secondValue}`;
 
     scaleDataDisplay(previousDataDisplay, PREVIOUS_DATA_MAX_LENGTH, PREVIOUS_DATA_SCALE_INDEX);
-}
-
-function insertDigit(e) {
-    if ((currentPrompt.length >= CURRENT_DATA_MAX_LENGTH)
-    ||  (currentPrompt.includes(".") && e.target.dataset.value === ".")) return;
-
-    if (currentPrompt === "0") currentPrompt = "";
-    if (!currentPrompt && e.target.dataset.value === ".") currentPrompt = "0";
-
-    currentPrompt += e.target.dataset.value;
-    updateCurrentData(currentPrompt);
-    
-    clearAfterResult();
-}
-
-function removeDigit() {
-    currentPrompt = currentPrompt.slice(0, -1);
-    if (currentPrompt === "0") currentPrompt = "";
-    updateCurrentData(currentPrompt);
-
-    clearAfterResult()
 }
 
 function clearAllData() {
@@ -78,11 +59,44 @@ function clearAfterResult() {
     clearPreviousData();
 }
 
+function scaleDataDisplay(dataDisplay, maxLength, scaleIndex) {
+    if (dataDisplay.textContent.length > maxLength) {
+        const extraDigits = dataDisplay.textContent.length - maxLength;
+
+        dataDisplay.style.scale = 1 - (extraDigits / scaleIndex);
+        dataDisplay.style.alignSelf = "center";
+    } else {
+        dataDisplay.removeAttribute("style");
+    }
+}
+
+// Insert and removes digits and select operators
+function insertDigit(e) {
+    if ((currentPrompt.length >= CURRENT_DATA_MAX_LENGTH)
+    ||  (currentPrompt.includes(".") && e.target.dataset.value === ".")) return;
+
+    if (currentPrompt === "0") currentPrompt = "";
+    if (!currentPrompt && e.target.dataset.value === ".") currentPrompt = "0";
+
+    currentPrompt += e.target.dataset.value;
+    updateCurrentData(currentPrompt);
+    
+    clearAfterResult();
+}
+
+function removeDigit() {
+    currentPrompt = currentPrompt.slice(0, -1);
+    if (currentPrompt === "0") currentPrompt = "";
+    updateCurrentData(currentPrompt);
+
+    clearAfterResult()
+}
+
 function selectOperator(e) {
     if (selectedOperator) calculateOperation();
     showingResult = false;
 
-    selectedOperator = e.target.dataset.operator;
+    selectedOperator = e.target.dataset.value;
     firstOperand = Number(currentDataDisplay.textContent);
 
     updatePreviousData(firstOperand, selectedOperator);
@@ -90,6 +104,7 @@ function selectOperator(e) {
     currentPrompt = "";
 }
 
+// Calculation and information processing
 function calculateOperation() {
     if (!selectedOperator || !currentPrompt) return;
 
@@ -133,17 +148,6 @@ function calculateOperation() {
 function roundDecimal(number) {
     const integerDigits = number.toString().split(".")[0];
     return Number(number.toFixed(CURRENT_DATA_MAX_LENGTH - (integerDigits.length + 1)));
-}
-
-function scaleDataDisplay(dataDisplay, maxLength, scaleIndex) {
-    if (dataDisplay.textContent.length > maxLength) {
-        const extraDigits = dataDisplay.textContent.length - maxLength;
-
-        dataDisplay.style.scale = 1 - (extraDigits / scaleIndex);
-        dataDisplay.style.alignSelf = "center";
-    } else {
-        dataDisplay.removeAttribute("style");
-    }
 }
 
 // Events
