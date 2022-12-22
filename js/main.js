@@ -1,6 +1,6 @@
 // Constants and variables
 const CURRENT_DATA_MAX_LENGTH = 12;
-const PREVIOUS_DATA_MAX_LENGTH = 23;
+const PREVIOUS_DATA_MAX_LENGTH = 26;
 
 let currentPrompt = "";
 let firstOperand = 0;
@@ -28,10 +28,10 @@ function updateCurrentData(newValue) {
     scaleDataDisplay(currentDataDisplay, CURRENT_DATA_MAX_LENGTH, 20);
 }
 
-function updatePreviousData(firstValue, operator, secondValue = "") {
+function updatePreviousData(firstValue = "", operator = "", secondValue = "") {
     previousDataDisplay.textContent = `${firstValue} ${operator} ${secondValue}`;
 
-    scaleDataDisplay(previousDataDisplay, PREVIOUS_DATA_MAX_LENGTH, 2);
+    scaleDataDisplay(previousDataDisplay, PREVIOUS_DATA_MAX_LENGTH, 40);
 }
 
 function insertDigit(e) {
@@ -63,7 +63,7 @@ function clearAllData() {
 }
 
 function clearPreviousData() {
-    previousDataDisplay.textContent = "";
+    updatePreviousData();
 
     firstOperand = 0;
     secondOperand = 0;

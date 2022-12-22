@@ -92,8 +92,10 @@ header {
 
 #previous-data {
     color: var(--previous-data-accent);
-    font-size: 1.15em;
-    margin-bottom: 2px;
+    font-size: 1.04em;
+    margin-bottom: 4px;
+
+    white-space: nowrap;
 }
 
 #current-data {
