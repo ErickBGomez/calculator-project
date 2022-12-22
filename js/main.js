@@ -35,8 +35,8 @@ function insertDigit(e) {
     if ((currentPrompt.length >= DATA_MAX_LENGTH)
     ||  (currentPrompt.includes(".") && e.target.dataset.value === ".")) return;
 
-    if (!currentPrompt && e.target.dataset.value === ".") currentPrompt = "0";
     if (currentPrompt === "0") currentPrompt = "";
+    if (!currentPrompt && e.target.dataset.value === ".") currentPrompt = "0";
 
     currentPrompt += e.target.dataset.value;
     updateCurrentData(currentPrompt);
@@ -113,7 +113,7 @@ function calculateOperation() {
     }
 
     // If result is decimal
-    if (result % 1 !== 0) {
+    if ((result % 1 !== 0)) {
         if (result.toString().length <= DATA_MAX_LENGTH) return;
         result = roundDecimal(result);
     }
