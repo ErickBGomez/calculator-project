@@ -6,6 +6,8 @@ let firstOperand = 0;
 let secondOperand = 0;
 let selectedOperator = "";
 
+let showingResult = false;
+
 // DOM Queries
 const currentDataDisplay = document.querySelector("#current-data");
 const previousDataDisplay = document.querySelector("#previous-data");
@@ -37,27 +39,42 @@ function insertDigit(e) {
 
     currentPrompt += e.target.dataset.value;
     updateCurrentData(currentPrompt);
+    
+    clearAfterResult();
 }
 
 function removeDigit() {
     currentPrompt = currentPrompt.slice(0, -1);
     if (currentPrompt === "0") currentPrompt = "";
     updateCurrentData(currentPrompt);
+
+    clearAfterResult()
 }
 
 function clearAllData() {
     currentPrompt = "";
-    
+    updateCurrentData(currentPrompt);
+
+    clearPreviousData();
+}
+
+function clearPreviousData() {
+    previousDataDisplay.textContent = "";
+
     firstOperand = 0;
     secondOperand = 0;
     selectedOperator = "";
+}
 
-    updateCurrentData(currentPrompt);
-    updatePreviousData("", "");
+function clearAfterResult() {
+    if (!showingResult) return;
+    showingResult = false;    
+    clearPreviousData();
 }
 
 function selectOperator(e) {
     if (selectedOperator) calculateOperation();
+    showingResult = false;
 
     selectedOperator = e.target.dataset.operator;
     firstOperand = Number(currentDataDisplay.textContent);
@@ -100,6 +117,7 @@ function calculateOperation() {
         result = roundDecimal(result);
     }
 
+    showingResult = true;
     currentDataDisplay.textContent = result;
 }
 
@@ -121,3 +139,4 @@ allClearButton.addEventListener("mousedown", clearAllData);
 
 // First loading functions
 updateCurrentData(currentPrompt);
+clearPreviousData();
