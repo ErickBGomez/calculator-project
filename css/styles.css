@@ -133,16 +133,19 @@ header {
     cursor: pointer;
 }
 
-.buttons button:active {
-    scale: 1;
+.buttons button:active,
+.buttons button.pressed {
+    scale: 0.97;
     transition: 75ms;
 }
 
-.action-button:active {
+.action-button:active,
+.action-button.pressed {
     filter: brightness(140%);
 }
 
-.number-button:active {
+.number-button:active,
+.number-button.pressed {
     filter: brightness(75%);
 }
 
