@@ -2,7 +2,6 @@
 const DATA_MAX_LENGTH = 12;
 
 let currentPrompt = "";
-
 let firstOperand = 0;
 let secondOperand = 0;
 let selectedOperator = "";
@@ -20,6 +19,7 @@ const equalsButton = document.querySelector("#equals");
 const backspaceButton = document.querySelector("#backspace");
 const allClearButton = document.querySelector("#all-clear");
 
+// Functions
 function updateCurrentData(newValue) {
     currentDataDisplay.textContent = (newValue || "0");
 }
@@ -32,7 +32,7 @@ function insertDigit(e) {
     if ((currentPrompt.length >= DATA_MAX_LENGTH)
     ||  (currentPrompt.includes(".") && e.target.dataset.value === ".")
     ||  (!currentPrompt && e.target.dataset.value === "0")) return;
-    
+
     if (!currentPrompt && e.target.dataset.value === ".") currentPrompt = "0";
 
     currentPrompt += e.target.dataset.value;
@@ -97,18 +97,19 @@ function calculateOperation() {
     // If result is decimal
     if (result % 1 !== 0) {
         if (result.toString().length <= DATA_MAX_LENGTH) return;
-     
-        const digitsSplitted = {
-            integer: result.toString().split(".")[0],
-            decimal: result.toString().split(".")[1]
-        }
-
-        console.log(digitsSplitted);
-
-        result = Number(result.toFixed(DATA_MAX_LENGTH - (digitsSplitted.integer.length + 1)));
+        result = roundDecimal(result);
     }
 
     currentDataDisplay.textContent = result;
+}
+
+function roundDecimal(number) {
+    const digitsSplitted = {
+        integer: number.toString().split(".")[0],
+        decimal: number.toString().split(".")[1]
+    }
+
+    return Number(number.toFixed(DATA_MAX_LENGTH - (digitsSplitted.integer.length + 1)));
 }
 
 // Events
