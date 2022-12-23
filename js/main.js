@@ -99,7 +99,7 @@ function selectOperand(newValue) {
 }
 
 function selectOperator(operatorValue) {
-    if (selectedOperator) calculateOperation();
+    if (selectedOperator && currentPrompt) calculateOperation();
     showingResult = false;
 
     selectedOperator = parseOperator(operatorValue);
@@ -153,7 +153,6 @@ function calculateOperation() {
             if (secondOperand == 0) {
                 result = 0;
                 updateCurrentData(getDividedZeroMessage());
-                // updateCurrentData("*blows up*");
                 return;
             }
 
@@ -187,7 +186,6 @@ function pressKeyAction(e) {
     
     if ((e.key >= 0 && e.key <= 9) || e.key === ".") {
         insertDigit(buttonKey.dataset.value);
-        //buttonKey.click();
     } else {
         switch(e.key) {
             case "+":
