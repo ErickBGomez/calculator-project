@@ -90,12 +90,14 @@ header {
     border-radius: 2px;
 }
 
+.display div {
+    white-space: nowrap;
+}
+
 #previous-data {
     color: var(--previous-data-accent);
     font-size: 1.04em;
-    margin-bottom: 4px;
-
-    white-space: nowrap;
+    margin-bottom: 4px;    
 }
 
 #current-data {

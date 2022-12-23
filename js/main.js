@@ -50,8 +50,8 @@ function clearAllData() {
 function clearPreviousData() {
     updatePreviousData();
 
-    firstOperand = 0;
-    secondOperand = 0;
+    firstOperand = selectOperand();
+    secondOperand = selectOperand();
     selectedOperator = "";
 }
 
@@ -94,12 +94,16 @@ function removeDigit() {
     clearAfterResult()
 }
 
+function selectOperand(newValue) {
+    return Number(newValue) || 0;
+}
+
 function selectOperator(operatorValue) {
     if (selectedOperator) calculateOperation();
     showingResult = false;
 
     selectedOperator = parseOperator(operatorValue);
-    firstOperand = Number(currentDataDisplay.textContent);
+    firstOperand = selectOperand(currentDataDisplay.textContent);
 
     updatePreviousData(firstOperand, selectedOperator);
     
@@ -124,11 +128,13 @@ function parseOperator(operator) {
 function calculateOperation() {
     if (!selectedOperator || !currentPrompt) return;
 
-    secondOperand = Number(currentDataDisplay.textContent);
+    secondOperand = selectOperand(currentDataDisplay.textContent);
     updatePreviousData(firstOperand, selectedOperator, secondOperand + " =");
     
     currentPrompt = "";
     let result = 0;
+    
+    showingResult = true;
 
     switch (selectedOperator) {
         case "+":
@@ -144,6 +150,13 @@ function calculateOperation() {
             break;
         
         case "÷":
+            if (secondOperand == 0) {
+                result = 0;
+                updateCurrentData(getDividedZeroMessage());
+                // updateCurrentData("*blows up*");
+                return;
+            }
+
             result = firstOperand / secondOperand;
             break;
     }
@@ -155,7 +168,6 @@ function calculateOperation() {
         }
     }
     
-    showingResult = true;
     updateCurrentData(result);
 }
 
@@ -206,6 +218,41 @@ function playKeyActionAnimation(button) {
 }
 
 // Others
+
+// User gets a random message when you try to divide by zero.
+// Yes, the calculator is going to be mad at you :)
+function getDividedZeroMessage() {
+    const messages = [
+        "yes",
+        "no",
+        "no. just. no",
+        "no way man",
+        ":(",
+        ">:(",
+        "really?",
+        "are you crazy?",
+        "are you serious?",
+        "try me",
+        "haha :|",
+        "you are funny :|",
+        "haha NO",
+        "💀",
+        "*explodes*",
+        "i'm crying",
+        "i won't do that",
+        "...",
+        "???",
+        "excuse me?",
+        "what???",
+        "but why???",
+        "huh?",
+        "i'm out",
+        "please stop"
+    ];
+
+    const randomIndex = Math.floor(Math.random() * messages.length);
+    return messages[randomIndex];
+}
 
 function openSourceCode() {
     window.open("https://github.com/ErickBGomez/calculator-project", "_blank").focus();
