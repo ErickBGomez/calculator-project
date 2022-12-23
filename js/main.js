@@ -126,7 +126,7 @@ function parseOperator(operator) {
 
 // Calculation and information processing
 function calculateOperation() {
-    if (!selectedOperator || !currentPrompt) return;
+    if (!selectedOperator) return;
 
     secondOperand = selectOperand(currentDataDisplay.textContent);
     updatePreviousData(firstOperand, selectedOperator, secondOperand + " =");
