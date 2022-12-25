@@ -15,7 +15,12 @@
 
 <br>
 
-[OPEN CALCULATOR]
+<p align="center">
+  <a href="https://erickbgomez.github.io/calculator-project/">
+    <img src="https://user-images.githubusercontent.com/90425287/209478045-3d0f2b02-1ff8-4e72-a12f-06f47c9abc32.png"
+    alt="OPEN CALCULATOR Button" width="400">
+  </a>
+</p>
 
 <br>
 
