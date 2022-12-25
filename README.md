@@ -11,7 +11,7 @@
 
 <br>
 
-Calculate It! gives you the basics of a calculator, such as addition, subtraction, multiplication, and division with integers and decimal numbers. And you can also make use of this project with the mouse or with the keyboard support as well.
+"Calculate It!" Project brings the basics of a calculator, such as addition, subtraction, multiplication, and division with integers and decimal numbers. You can also make use of this project with the mouse or with the keyboard support as well.
 
 <br>
 
@@ -19,23 +19,13 @@ Calculate It! gives you the basics of a calculator, such as addition, subtractio
 
 <br>
 
-This project has been done to demonstrate the skills and knowledge gained in **The Odin Project's JavaScript Basics portfolio**. Some fundamental topics such as the use of events, functions, DOM manipulation and more were applied here.
+This project has been done to demonstrate the skills and knowledge obtained in **The Odin Project's JavaScript Basics portfolio**. Some fundamental topics such as the use of events, functions, DOM manipulation and more were applied here.
 
-Also, I make use of my skills acquired outside the course, such as the creation of vectors or the use of fonts to be able to provide a better product for this project.
+Also, I've applied my skills acquired outside the course, such as the creation of vectors or the use of fonts to be able to provide a better product for this project.
 
-## Easter Eggs
-
-That's right, this would not be a simple calculator like the rest. This one has something special! :)
-
-I don't want to go into too much detail, but I just want you to know that if you **divide any number by `0`**, something peculiar happens.
-
-I could say that the calculator is "going to be mad at you." Try it and enjoy his anger! :D
-
-# Keyboard Support
+## Keyboard Support
 
 As mentioned before. The project has keyboard support instead of clicking buttons.
-
-## Keybindings:
 
 - `0 to 9`: Enter its respective digit into the calculator memory.
 - `.`: Enter the decimal point into the calculator.
@@ -48,6 +38,14 @@ As mentioned before. The project has keyboard support instead of clicking button
 - `Escape`: Delete calculator memory.
 
 All of these keys work on both the alphanumeric keypad and the numeric keypad as well.
+
+## Easter Eggs
+
+That's right, this would not be a simple calculator like the rest. This one has something special! :)
+
+I don't want to go into too much detail, but I just want you to know that if you **divide any number by `0`**, something peculiar happens.
+
+I could say that the calculator is "going to be mad at you". Try it and enjoy his anger! :D
 
 # Resources Information
 
