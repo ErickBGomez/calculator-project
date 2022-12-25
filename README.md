@@ -23,6 +23,14 @@ This project has been done to demonstrate the skills and knowledge gained in **T
 
 Also, I make use of my skills acquired outside the course, such as the creation of vectors or the use of fonts to be able to provide a better product for this project.
 
+## Easter Eggs
+
+That's right, this would not be a simple calculator like the rest. This one has something special! :)
+
+I don't want to go into too much detail, but I just want you to know that if you **divide any number by `0`**, something peculiar happens.
+
+I could say that the calculator is "going to be mad at you." Try it and enjoy his anger! :D
+
 # Keyboard Support
 
 As mentioned before. The project has keyboard support instead of clicking buttons.
