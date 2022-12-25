@@ -44,7 +44,7 @@ header {
 .logo {
     width: 450px;
     height: 120px;
-    background-color: #f0a169;
+    background: url("../img/calculate-it-logo.png");
 
     font-size: 1.5em;
 }
