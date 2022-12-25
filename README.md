@@ -44,8 +44,8 @@ All of these keys work on both the alphanumeric keypad and the numeric keypad as
 # Resources Information
 
 - **Font used:**
-1. <a href="https://fonts.google.com/specimen/Nunito">**Nunito**</a>: Main text, buttons, and title
-2. <a href="https://fonts.google.com/specimen/Martian+Mono">Martian Mono</a>: Calculator Screen
+1. **[Nunito](https://fonts.google.com/specimen/Nunito)**: Main text, buttons, and title
+2. **[Martian Mono](https://fonts.google.com/specimen/Martian+Mono)**: Calculator Screen
 
 - **Favicon and Main Title Logo**: Made by me!
 
