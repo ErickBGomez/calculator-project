@@ -23,6 +23,16 @@ This project has been done to demonstrate the skills and knowledge gained in **T
 
 Also, I make use of my skills acquired outside the course, such as the creation of vectors or the use of fonts to be able to provide a better product for this project.
 
+# Resources Information
+
+- **Font used:**
+1. <a href="https://fonts.google.com/specimen/Nunito">**Nunito**</a>: Main text, buttons, and title
+2. <a href="https://fonts.google.com/specimen/Martian+Mono">Martian Mono</a>: Calculator Screen
+
+- **Favicon and Main Title Logo**: Made by me!
+
+Creating vectors and illustrations is a new skill I'm learning at the moment, and I'm loving it! So I found the opportunity to apply my knowledge of vector graphics in this project!
+
 # New Skills Applied
 
 - DOM Manipulation
