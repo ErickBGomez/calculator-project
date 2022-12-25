@@ -23,6 +23,24 @@ This project has been done to demonstrate the skills and knowledge gained in **T
 
 Also, I make use of my skills acquired outside the course, such as the creation of vectors or the use of fonts to be able to provide a better product for this project.
 
+# Keyboard Support
+
+As mentioned before. The project has keyboard support instead of clicking buttons.
+
+## Keybindings:
+
+- `0 to 9`: Enter its respective digit into the calculator memory.
+- `.`: Enter the decimal point into the calculator.
+- `+`: Select addition operator.
+- `-`: Select subtraction operator.
+- `*`: Select multiplication operator.
+- `/`: Select division operator.
+- `Enter`: Calculate entered operation.
+- `Backspace`: Delete the last digit.
+- `Escape`: Delete calculator memory.
+
+All of these keys work on both the alphanumeric keypad and the numeric keypad as well.
+
 # Resources Information
 
 - **Font used:**
