@@ -22,3 +22,12 @@ Calculate It! gives you the basics of a calculator, such as addition, subtractio
 This project has been done to demonstrate the skills and knowledge gained in "The Odin Project's JavaScript Basics portfolio". Some fundamental topics such as the use of events, functions, DOM manipulation and more were applied here.
 
 Also, I make use of my skills acquired outside the course, such as the creation of vectors or the use of fonts to be able to provide a better product for this project.
+
+# New Skills Applied
+
+- DOM Manipulation
+- NodeList
+- Button Click Events
+- Keyboard Events
+- CSS Grid Layout
+- Transitions
